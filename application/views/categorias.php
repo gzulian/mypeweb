@@ -278,7 +278,7 @@
             <div class="box-header">
               <h3 class="box-title"></h3>
                 <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#new_modal"><i class="fa fa-plus"></i> Nueva Categoría </button>
-                <button style="margin-right:  2%" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalist"><i class="fa fa-list-ol"></i> Ordenar Categorias</button>   
+                <button style="margin-right:  2%" class="btn btn-primary pull-right" data-toggle="modal" data-target="#modalist"><i class="fa fa-list-ol"></i> Ordenar Categorías</button>   
                 
             </div>
               

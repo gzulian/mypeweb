@@ -296,7 +296,7 @@
                 <thead>
                 <th>Nombre Producto</th>
                 <th>Moneda Producto</th>
-                <th>Posicion Producto</th>
+                <th>Posición Producto</th>
                 <th>Estado Producto</th>
                 <th>Precio total Producto</th>
                 <th>Editar</th>

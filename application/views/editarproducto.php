@@ -625,6 +625,13 @@ $('#tipo').on('change', function() {
 })
    
 });
+
+     $(function () {
+        setTimeout(function() {
+            $(".messages").fadeOut(3000);
+        },3000);
+
+    });
                                
 </script>
 </body>

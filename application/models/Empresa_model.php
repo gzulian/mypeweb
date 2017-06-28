@@ -15,7 +15,12 @@ private  $_columns  =  array(
 'emp_objetivo' => '',
 'emp_descripcion' => '',
 'emp_estado'=>0,
-'emp_slogan'=>''
+'emp_slogan'=>'',
+'emp_nombrefantasia'=>'',
+'emp_telefono'=>'',
+'emp_direccion'=>'',
+'emp_celular'=>'',
+'emp_email'=>'',
 );
 
 public function get($attr){
@@ -41,7 +46,7 @@ public function insert(){
 $this->db->insert('mypeweb_empresa',$this->_columns);
 }
 
-  function update($id, $mision,$vision,$objetivo,$descripcion,$estado,$slogan){
+  function update($id, $mision,$vision,$objetivo,$descripcion,$estado,$slogan,$correo,$telefono,$celular,$direccion,$nombre){
       $idusu = $id;
       $this->load->database();
       $data = array(
@@ -50,7 +55,13 @@ $this->db->insert('mypeweb_empresa',$this->_columns);
 		'emp_objetivo' => $objetivo,
 		'emp_descripcion' => $descripcion,
     'emp_estado'=> $estado,
-		'emp_slogan'=> $slogan
+    'emp_slogan'=> $slogan,
+    'emp_email'=> $correo,
+    'emp_telefono'=> $telefono,
+    'emp_celular'=> $celular,
+    'emp_direccion'=> $direccion,
+		'emp_nombrefantasia'=> $nombre,
+
 		);
 
     $this->db->where('emp_id',$idusu);
@@ -83,7 +94,7 @@ public function findAll(){
          }
     return false;
   }
- public function save($mision,$vision,$objetivo,$descripcion,$slogan){
+ public function save($mision,$vision,$objetivo,$descripcion,$slogan,$correo,$telefono,$celular,$direccion,$nombre){
           $this->load->database();    
           $empresa = array(
           'emp_id' => null,	
@@ -92,7 +103,12 @@ public function findAll(){
     		  'emp_objetivo' => $objetivo,
     		  'emp_descripcion' => $descripcion,
     		  'emp_estado'=> 0,
-          'emp_slogan'=> $slogan
+          'emp_slogan'=> $slogan,
+          'emp_email'=> $correo,
+          'emp_telefono'=> $telefono,
+          'emp_celular'=> $celular,
+          'emp_direccion'=> $direccion,
+          'emp_nombrefantasia'=> $nombre,
 
     		  );
       $this->db->insert('mypeweb_empresa', $empresa); 

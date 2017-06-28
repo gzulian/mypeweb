@@ -19,15 +19,12 @@ class ConfController extends CI_Controller {
 
 	public function agregarConfiguracion(){
 
-		if(isset($_POST['number']) && isset($_POST['background']) && isset($_POST['footer']) && isset($_POST['navbar']) && isset($_POST['name'])) {
+		if(isset($_POST['background']) && isset($_POST['footer']) && isset($_POST['navbar']) ) {
 			if($this->session->userdata('login') == TRUE){
-			$number = $this->input->post('number');
-			$email = $this->input->post('email');
 			$background = $this->input->post('background');
 			$footer = $this->input->post('footer');
 			$navbar = $this->input->post('navbar');
 			$video = $this->input->post('video');
-			$nombre = $this->input->post('name');
 			$fontcolor = $this->input->post('fontcolor');
 			$fontstyle = $this->input->post('fontstyle');
 			$fontsize = $this->input->post('fontsize');
@@ -64,7 +61,7 @@ class ConfController extends CI_Controller {
 			$imagenbanner = '';
 		}
 			
-			$datos = $this->conf->save($number,$email,$background,$footer,$navbar,$imagen,$video,$nombre,$fontcolor,$fontstyle,$fontsize,$imagenbanner,$productos);
+			$datos = $this->conf->save($background,$footer,$navbar,$imagen,$video,$fontcolor,$fontstyle,$fontsize,$imagenbanner,$productos);
 			$this->session->set_flashdata('notice', 'Configuración registrada correctamente!');
 			redirect('ConfController');
 		}else{
@@ -79,17 +76,14 @@ class ConfController extends CI_Controller {
 	} //Fin agregar configuración
 
 	public function editarConfiguracion(){
-			if(isset($_POST['editnumber']) && isset($_POST['editbackground']) && isset($_POST['editfooter']) && isset($_POST['editnavbar']) && isset($_POST['editname'])) {
+			if(isset($_POST['editbackground']) && isset($_POST['editfooter']) && isset($_POST['editnavbar']) ) {
 			if($this->session->userdata('login') == TRUE ){
 
 			$id         = $this->input->post('editid');	
-			$number     = $this->input->post('editnumber');
-			$email      = $this->input->post('editemail');
 			$background = $this->input->post('editbackground');
 			$footer     = $this->input->post('editfooter');
 			$navbar     = $this->input->post('editnavbar');
 			$video      = $this->input->post('editvideo');
-			$nombre     = $this->input->post('editname');
 			$fontcolor  = $this->input->post('editfontcolor');
 			$fontstyle  = $this->input->post('editfontstyle');
 			$fontsize   = $this->input->post('editfontsize');
@@ -136,7 +130,7 @@ class ConfController extends CI_Controller {
 		}
 			
 
-			$datos = $this->conf->update($id,$number,$email,$background,$footer,$navbar,$imagen,$video,$nombre,$fontcolor,$fontstyle,$fontsize, $estado,$imagenbanner,$productos);
+			$datos = $this->conf->update($id,$background,$footer,$navbar,$imagen,$video,$fontcolor,$fontstyle,$fontsize, $estado,$imagenbanner,$productos);
 
 			if ($estado == 1) {
 			$this->conf->activar($id);
@@ -166,14 +160,11 @@ class ConfController extends CI_Controller {
 			$conf = $this->conf->findById($confid);
 
 			$configuration =  array(
-          'number' => $conf->get('con_phonenumber'),
-          'email'=> $conf->get('con_email'),
           'background' => $conf->get('con_background'),
           'footer' => $conf->get('con_footer'),
           'navbar' => $conf->get('con_navbar'),
           'logo' => $conf->get('con_logo'),
           'video' => $conf->get('con_video'),
-          'nombre' => $conf->get('con_nombrefantasia'),
           'fontcolor' => $conf->get('con_fontcolor'),
           'fontstyle' => $conf->get('con_fontstyle'),
           'fontsize' => $conf->get('con_fontsize'),
@@ -196,7 +187,6 @@ class ConfController extends CI_Controller {
 		if($this->session->userdata('login') == TRUE){
 
 		if(isset($_POST['idconf'])){
-
 		$idconf 	= $this->input->post('idconf');
 		$redid  = intval($idconf);
 		$datos = $this->conf->delete($redid);

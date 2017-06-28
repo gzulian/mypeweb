@@ -10,9 +10,9 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/bootstrap.min.css')?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url('resources/plugins/datatables/dataTables.bootstrap.css')?>">
   <!-- Theme style -->
@@ -296,9 +296,6 @@
               <table id="example1" class="table  responsive table-bordered table-striped">
                 
                 <thead>
-                <th>Nombre</th>
-                <th>Teléfono</th>
-                <th>Email</th>
                 <th>Logo</th>
                 <th>Fondo</th>
                 <th>Footer</th>
@@ -312,10 +309,6 @@
                 <tbody>
                 <tr>
                  <?php foreach ($conf as $con): ?>
-                  
-                    <td><?=$con->get('con_nombrefantasia')?></td>
-                    <td><?=$con->get('con_phonenumber')?></td>
-                    <td><?=$con->get('con_email')?></td>
                     <?php if($con->get('con_logo') != NULL && !empty($con->get('con_logo'))){?>
                      <td align="center"><a href="#<?=$con->get('con_id')?>"><img src="<?=base_url('')?>resources/images/logo/<?=$con->get('con_logo')?>" style="width:40px; height:40px;  border-radius: 50%;"></a></td>
                     <?php }else{ ?>
@@ -396,18 +389,6 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('ConfController/agregarConfiguracion')?>" method="POST">
-                    <div class="col-lg-12">
-                          <div class="col-lg-6">
-                            <label >Nombre Empresa<span class="required">*</span>
-                            </label>
-                            <input type="text" id="name" name="name"  required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                        <div class="col-lg-6">
-                            <label >Correo Electrónico
-                            </label>
-                            <input type="email" id="email" name="email" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
 
                     <div class="col-lg-12">
                         <div class="col-lg-6">
@@ -445,11 +426,6 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                            
-                        <div class="col-lg-6">
-                            <label >Número de Teléfono<span class="required">*</span></label>
-                            <input type="text" id="number" name="number" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
 
                             <div class="col-lg-6">
                             <label>Tamaño de Fuente
@@ -470,10 +446,6 @@
 
                                 </select>
                         </div>
-                    </div>
-
-                    <div class="col-lg-12">
-
                         <div class="col-lg-6">
                             <label >Estilo de fuente
                             </label>
@@ -486,6 +458,11 @@
 
                                 </select>
                         </div>
+                    </div>
+
+                    <div class="col-lg-12">
+
+                        
                         <div class="col-lg-6">
                             <label>Link del Video
                             </label>
@@ -527,19 +504,6 @@
             <div class="modal-body">
                 <form class="form-horizontal form-label-left" enctype="multipart/form-data" action="<?=site_url('ConfController/editarConfiguracion')?>" method="POST">
                     <div class="col-lg-12">
-                     <div class="col-lg-6">
-                            <label >Nombre Empresa<span class="required">*</span>
-                            </label>
-                            <input type="text" id="editname" name="editname"  required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                        <div class="col-lg-6">
-                            <label >Correo Electrónico
-                            </label>
-                            <input type="email" id="editemail" name="editemail" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
                         <div class="col-lg-6">
                             <label >Fondo del Sitio Web<span class="required">*</span>
                             </label>
@@ -577,11 +541,6 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                          <div class="col-lg-6">
-                            <label >Número de Teléfono<span class="required">*</span></label>
-                            <input type="text" id="editnumber" name="editnumber" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-
                         <div class="col-lg-6">
                             <label>Tamaño de Fuente
                             </label>
@@ -735,14 +694,11 @@ $("#editfontsize").select2(); */
                 dataType: "json",
                 data:{"idconf" : id},
                 beforeSend: function () {
-                    $("#editnumber").val("");
-                    $("#editemail").val("");
                     $("#editbackground").val("");
                     $("#editfooter").val("");
                     $("#editnavbar").val("");
                     $("#editlogo").val("");
                     $("#editvideo").val("");
-                    $("#editname").val("");
                     $("#editfontcolor").val("");
                     $("#editfontstyle").val("");
                     $("#editfontsize").val("");
@@ -753,13 +709,10 @@ $("#editfontsize").select2(); */
                 },
                 success: function(data) {
                     console.log(data);
-                    $("#editnumber").val(data.number);
-                    $("#editemail").val(data.email);
                     $("#editbackground").val(data.background);
                     $("#editfooter").val(data.footer);
                     $("#editnavbar").val(data.navbar);
                     $("#editvideo").val(data.video);
-                    $("#editname").val(data.nombre);
                     $("#editfontcolor").val(data.fontcolor);
                     $("#editfontstyle").val(data.fontstyle).trigger("change");
                     $("#editfontsize").val(data.fontsize).trigger("change");

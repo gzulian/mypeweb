@@ -11,14 +11,11 @@ parent::__construct();
 
 private  $_columns  =  array(
 'con_id' => 0,
-'con_phonenumber' => '',
-'con_email'=>'',
 'con_background' => '',
 'con_footer' => '',
 'con_navbar' => '',
 'con_logo' => '',
 'con_video' => '',
-'con_nombrefantasia' => '',
 'con_fontcolor' => '',
 'con_fontstyle' => '',
 'con_fontsize' => 0,
@@ -51,18 +48,15 @@ public function insert(){
 $this->db->insert('mypeweb_configuration',$this->_columns);
 }
 
-function update($id,$number,$email,$background,$footer,$navbar,$logo,$video,$name,$fontcolor,$fontstyle,$fontsize,$status,$banner,$products){
+function update($id,$background,$footer,$navbar,$logo,$video,$fontcolor,$fontstyle,$fontsize,$status,$banner,$products){
       $idconf = $id;
       $this->load->database();
       $data = array(
-          'con_phonenumber'    => $number,
-          'con_email'          => $email,
           'con_background'     => $background,
           'con_footer'         => $footer,
           'con_navbar'         => $navbar,
           'con_logo'           => $logo,
           'con_video'          => $video,
-          'con_nombrefantasia' => $name,
           'con_fontcolor'      => $fontcolor,
           'con_fontstyle'      => $fontstyle,
           'con_fontsize'       => $fontsize,
@@ -75,17 +69,14 @@ function update($id,$number,$email,$background,$footer,$navbar,$logo,$video,$nam
       
     }
 
-  public function save($number,$email,$background,$footer,$navbar,$logo,$video,$name,$fontcolor,$fontstyle,$fontsize,$banner,$products){
+  public function save($background,$footer,$navbar,$logo,$video,$fontcolor,$fontstyle,$fontsize,$banner,$products){
           $this->load->database();    
           $configuration = array(
-          'con_phonenumber'    => $number,
-          'con_email'          => $email,
           'con_background'     => $background,
           'con_footer'         => $footer,
           'con_navbar'         => $navbar,
           'con_logo'           => $logo,
           'con_video'          => $video,
-          'con_nombrefantasia' => $name,
           'con_fontcolor'      => $fontcolor,
           'con_fontstyle'      => $fontstyle,
           'con_fontsize'       => $fontsize,

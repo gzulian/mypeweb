@@ -10,9 +10,9 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/bootstrap.min.css')?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url('resources/plugins/datatables/dataTables.bootstrap.css')?>">
   <!-- Theme style -->
@@ -265,10 +265,10 @@
               <table id="example1" class="table table-bordered table-striped">
                 
                 <thead>
-                <th>Misión</th>
-                <th>Visión</th>
-                <th>Objetivo</th>
-                <th>Descripción</th>
+                <th>Nombre</th>
+                <th>Direccion</th>
+                <th>Télefono fijo</th>
+                <th>Celular</th>
                 <th>Estado</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -278,10 +278,10 @@
                 <tr>
                  <?php foreach ($empresa as $emp): ?>
                   
-                    <td><?=$emp->get('emp_mision')?></td>
-                    <td><?=$emp->get('emp_vision')?></td>
-                    <td><?=$emp->get('emp_objetivo')?></td>
-                    <td><?=$emp->get('emp_descripcion')?></td>
+                    <td><?=$emp->get('emp_nombrefantasia')?></td>
+                    <td><?=$emp->get('emp_direccion')?></td>
+                    <td><?=$emp->get('emp_telefono')?></td>
+                    <td><?=$emp->get('emp_celular')?></td>
                     <?php if($emp->get('emp_estado')==1){?>
                     <td>Habilitado</td>
                     <?php }else{?>
@@ -311,7 +311,7 @@
 
     <!--==== Modal Nuevos Datos Empresa ====-->
 
-    <div id="new_modal" class="modal fade" role="dialog" aria-hidden="true">
+    <div id="new_modal" class="modal fade " role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -319,13 +319,54 @@
                     </button>
                     <h4 class="modal-title" >Nuevos datos Empresa</h4>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body">
                     <form class="form-horizontal form-label-left" action="<?=site_url('EmpresaController/agregarEmpresa')?>" method="POST">
+                       <div class="row">
+                         <div class="col-md-6">
+                            
+                              <label class="control-label" for="first-name">Nombre empresa<span class="required">*</span>
+                              </label>
+                              <input  id="" name="nombre" required="required" class="form-control">
+                            
+                          </div>
+                           <div class="col-md-6">
+                            
+                              <label class="control-label" for="first-name">Correo<span class="required">*</span>
+                              </label>
+                              <input  id="" name="email" required="required" class="form-control">
+                            
+                          </div>
+                       </div>
+                        <div class="row">
+                         
+                          <div class="col-md-4">
+                           
+                              <label class="control-label" for="first-name">Teléfono móvil<span class="required">*</span>
+                              </label>
+                              <input  id="" name="celular" required="required" class="form-control">
+                             
+                          </div>  
+                          <div class="col-md-4">
+                            
+                              <label class="control-label" for="first-name">Teléfono fijo<span class="required">*</span>
+                              </label>
+                              <input  id="" name="telefono" required="required" class="form-control">
+                           
+                          </div>  
+                          <div class="col-md-4">
+                            
+                              <label class="control-label" for="first-name">Dirección<span class="required">*</span>
+                              </label>
+                              <input  id="" name="direccion" required="required" class="form-control">
+                           
+                          </div>  
+                        </div>
+                        <br>
                         <div class="form-group">
                             <label class="control-label col-md-3" for="first-name">Slogan<span class="required">*</span>
                             </label>
                              <div class="col-md-7">
-                                <textarea rows="4" cols="50" id="mision" name="slogan" required="required"></textarea>
+                                <textarea rows="4" cols="50" id="slogan" name="slogan" required="required"></textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -387,6 +428,47 @@
                 </div>
                 <div class="modal-body text-center">
                     <form class="form-horizontal form-label-left" action="<?=site_url('EmpresaController/editarEmpresa')?>" method="POST">
+                    <div class="row">
+                         <div class="col-md-6">
+                            
+                              <label class="control-label" for="first-name">Nombre empresa<span class="required">*</span>
+                              </label>
+                              <input  id="nombre" name="nombre" required="required" class="form-control">
+                            
+                          </div>
+                          <div class="col-md-6">
+                            
+                              <label class="control-label" for="first-name">Correo<span class="required">*</span>
+                              </label>
+                              <input  id="email" name="email" required="required" class="form-control">
+                            
+                          </div>
+                       </div>
+                        <div class="row">
+                         
+                          <div class="col-md-4">
+                           
+                              <label class="control-label" for="first-name">Teléfono móvil<span class="required">*</span>
+                              </label>
+                              <input  id="celular" name="celular" required="required" class="form-control">
+                             
+                          </div>  
+                          <div class="col-md-4">
+                            
+                              <label class="control-label" for="first-name">Teléfono fijo<span class="required">*</span>
+                              </label>
+                              <input  id="telefono" name="telefono" required="required" class="form-control">
+                           
+                          </div>  
+                          <div class="col-md-4">
+                            
+                              <label class="control-label" for="first-name">Dirección<span class="required">*</span>
+                              </label>
+                              <input  id="direccion" name="direccion" required="required" class="form-control">
+                           
+                          </div>  
+                        </div>
+                        <br>
                         <div class="form-group">
                             <label class="control-label col-md-3" for="first-name">Slogan
                             </label>
@@ -553,6 +635,9 @@ $("#editnombrered").select2();
                     $("#editestado").val("");
                     $("#editempid").val("");
                     $("#editslogan").val("");
+                    $("#telefono").val("");
+                    $("#celular").val("");
+                    $("#nombre").val("");
                     $('#carga_modal').modal('show');
                 },
                 success: function(data) {
@@ -564,6 +649,11 @@ $("#editnombrered").select2();
                     $("#editestado").val(data.estado);
                     $("#editempid").val(id);
                     $("#editslogan").val(data.slogan);
+                    $("#telefono").val(data.telefono);
+                    $("#celular").val(data.celular);
+                    $("#nombre").val(data.nombre);
+                    $("#email").val(data.email);
+                    $("#direccion").val(data.direccion);
                     $('#carga_modal').modal('hide');
                     $('#edit_modal').modal('show').fadeIn(800);
                     

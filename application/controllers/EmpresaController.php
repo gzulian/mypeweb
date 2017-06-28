@@ -27,8 +27,13 @@ public function __construct()
 			$objetivo    = $this->input->post('objetivo');
 			$descripcion = $this->input->post('descripcion');
 			$slogan 	 = $this->input->post('slogan');
+			$nombre 	 = $this->input->post('nombre');
+			$telefono 	 = $this->input->post('telefono');
+			$celular 	 = $this->input->post('celular');
+			$email 	     = $this->input->post('email');
+			$direccion 	 = $this->input->post('direccion');
 
-			$datos = $this->empresa->save($mision,$vision,$objetivo,$descripcion,$slogan);
+			$datos = $this->empresa->save($mision,$vision,$objetivo,$descripcion,$slogan,$email,$telefono,$celular,$direccion,$nombre);
 			$this->session->set_flashdata('notice', 'Los datos de empresa  han sido creados correctamente!');
 			redirect('EmpresaController/index');
 		}		
@@ -42,14 +47,19 @@ public function __construct()
 
 		if(isset($_POST['editmision']) && isset($_POST['editvision']) && isset($_POST['editobjetivo']) && isset($_POST['editdescripcion'])){
 			$id          = $this->input->post('editempid');
-			$mision 	 = $this->input->post('editmision');
-			$vision		 = $this->input->post('editvision');
+			$mision      = $this->input->post('editmision');
+			$vision      = $this->input->post('editvision');
 			$objetivo    = $this->input->post('editobjetivo');
 			$descripcion = $this->input->post('editdescripcion');
-			$slogan 	 = $this->input->post('editslogan');
+			$slogan      = $this->input->post('editslogan');
 			$estado      = $this->input->post('editestado');
+			$nombre      = $this->input->post('nombre');
+			$telefono    = $this->input->post('telefono');
+			$celular     = $this->input->post('celular');
+			$correo 	 = $this->input->post('email');
+			$direccion 	 = $this->input->post('direccion');
 
-			$datos = $this->empresa->update($id,$mision,$vision,$objetivo,$descripcion,$estado,$slogan);
+			$datos = $this->empresa->update($id,$mision,$vision,$objetivo,$descripcion,$estado,$slogan,$correo,$telefono,$celular,$direccion,$nombre);
 			if ($estado == 1) {
 			$this->empresa->activar($id);
 			$this->empresa->desactivar($id);
@@ -75,6 +85,11 @@ public function __construct()
 			$redid  = intval($idred);
 			$empresa = $this->empresa->findById($redid);
 			$empre = array(	
+    		  'telefono' => $empresa->get('emp_telefono'),
+    		  'celular' => $empresa->get('emp_celular'),
+    		  'email' => $empresa->get('emp_email'),
+    		  'direccion' => $empresa->get('emp_direccion'),
+    		  'nombre' => $empresa->get('emp_nombrefantasia'),
     		  'mision' => $empresa->get('emp_mision'),
     		  'vision' => $empresa->get('emp_vision'),
     		  'objetivo' => $empresa->get('emp_objetivo'),

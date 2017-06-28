@@ -25,8 +25,8 @@ class MainController extends CI_Controller {
 		
 
 		//print_r($data['multimedia']); exit();
-		$data['redes']=$this->redes->findAll();
-		
+		$data['redes']   =$this->redes->findAll();
+		$data['empresa'] = $this->empresa->getActive();
 		$this->load->view('web/header', $data);
 		$this->load->view('web/home', $data);
 		$this->load->view('web/footer', $data);

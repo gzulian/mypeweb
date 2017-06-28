@@ -109,7 +109,17 @@ public function activar($id){
   $query = $this->db->query($sql);
   return 1;
 }
+public function getActive(){
+  $this->db->limit(1);
+  $query = $this ->db-> get_where('mypeweb_empresa',array('emp_estado'=>1));
+  $empresa = null;
+  if($query -> num_rows() == 1){
+    $row = $query->row_object();
+    $empresa = $this->create($row); 
+  }
+  return $empresa;
 
+}
 }
 
 /* End of file Empresa_model.php */

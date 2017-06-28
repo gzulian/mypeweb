@@ -34,10 +34,14 @@ class MainController extends CI_Controller {
 	}
 
 	public function contacto(){
-		$this->load->view('web/header');
-		$this->load->view('web/contacto');
-		$this->load->view('web/footer');
-
+		$data['config']  =	$this->conf->findAllActivados();
+		$data['redes']   =	$this->redes->findAll();
+		$data['empresa'] = 	$this->empresa->getActive();
+		
+		
+		$this->load->view('web/header',$data);
+		$this->load->view('web/contacto',$data);
+		$this->load->view('web/footer',$data);
 	}
 
 	public function categoria($idcat=null){

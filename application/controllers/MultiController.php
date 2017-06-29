@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MultiController extends CI_Controller{
-	public function __construct()
+public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Multimedia_model','multimedia',true);
@@ -17,19 +17,27 @@ class MultiController extends CI_Controller{
 		
 		$this->load->view('multimedia',$datitos,FALSE);
 	}
-	public function agregarMulti(){	
+		public function agregarMulti(){
+    	
     	$mulproid = $this->input->post('mulpro');
 		$nommuli= $this->input->post('nommul');
 		$rutamul= $this->input->post('rutmul');
 		$estadomul = $this->input->post('estmul');
 		$datos = $this->multimedia->save($mulproid,$nommuli,$rutamul,$estadomul);
 			redirect('MultiController/index');
-	}
-	public function eliminarMulti(){
+		
+		}
+		 public function eliminarMulti(){
+
+		
+
 		$idmul 	= $this->input->post('idmul');
 		$mulid  = intval($idmul);
 		$datos = $this->multimedia->delete($mulid);
 		redirect('MultiController/index');
+		
+		
+
 	}
 	public function editarMultimedia(){
 		    $idmul 	= $this->input->post('editmul');
@@ -40,26 +48,31 @@ class MultiController extends CI_Controller{
 		    $mulest = $this->input->post('editestmul');
 		    $datos = $this->multimedia->update($mulproid,$mulid,$mulnom,$mulrut,$mulest);
 			redirect('MultiController/index');
-	}
+		}
 	public function guardar(){
 		$idArray = explode(",",$_POST['ids']);
         $db = $this->multimedia->updateOrder($idArray);
         redirect('MultiController/index');
 	} 
+	
+			
+		
 	public function detalleMulti(){
-	    $idmul = $this->input->post('idmul');
-		$mulid  = intval($idmul);
-		$multimedia = $this->multimedia->findById($mulid);
-		$Muldet= array(
-			'producto' => $multimedia->get('mul_pro_id'),
-			'id'=> $multimedia->get('mul_id'),
-	        'nombre' => $multimedia->get('mul_name'),
-	        'ruta'=> $multimedia->get('mul_route'),
-	        'estado' => $multimedia->get('mul_status'),
-	        );
-		echo json_encode($Muldet);
+            $idmul = $this->input->post('idmul');
+			$mulid  = intval($idmul);
+			$multimedia = $this->multimedia->findById($mulid);
+
+			$Muldet= array(
+				'producto' => $multimedia->get('mul_pro_id'),
+				'id'=> $multimedia->get('mul_id'),
+                'nombre' => $multimedia->get('mul_name'),
+                'ruta'=> $multimedia->get('mul_route'),
+                'estado' => $multimedia->get('mul_status'),
+                );
+			echo json_encode($Muldet);
+		
+        
 	}
 
 
-}
-?>
+}?>

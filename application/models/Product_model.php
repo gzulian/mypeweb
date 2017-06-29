@@ -164,4 +164,37 @@ public function findAll(){
     return $multimedia;
     //return $CI->Multimedia_model->findById2($this->_columns['pro_usu_id']);  
   }
+  function getAllMultimedia(){
+    $CI         =& get_instance();
+    $CI->load->model('Multimedia_model');
+    $this->db->order_by('mul_position');
+    $consulta =  $this->db->get_where('mypeweb_multimedia',
+      array('mul_pro_id'=> $this->_columns['pro_id'] ));
+    $multimedia = array();
+    if($consulta->num_rows() > 0){
+      foreach ($consulta->result() as $key => $value) {
+        $multimedia[] = $CI->Multimedia_model->create($value);
+        
+      }
+    }
+    
+    return $multimedia;
+    //return $CI->Multimedia_model->findById2($this->_columns['pro_usu_id']);  
+  }
+  public function find($parameter){
+    $result=array();  
+    $this->db->select('*');
+    $this->db->from('mypeweb_product');
+    $this->db->where('pro_status',1);
+    $this->db->like('pro_name',$parameter);
+    $this->db->order_by("pro_position", "asc");
+    
+    $consulta = $this->db->get();
+    if($consulta->num_rows() > 0){
+      foreach ($consulta->result() as $row) {
+        $result[] = $this->create($row);
+      }
+    }
+    return $result;
+  }
 }

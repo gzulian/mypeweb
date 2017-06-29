@@ -9,9 +9,9 @@
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?=base_url('resources/bootstrap/css/bootstrap.min.css')?>">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- DataTables -->
   <link rel="stylesheet" href="<?=base_url('resources/plugins/datatables/dataTables.bootstrap.css')?>">
   <!-- Theme style -->
@@ -335,8 +335,9 @@
                       </label>
                       <div class="col-md-3">
                           <select name="product[pro_currency]" id="currency" required="required"  class="js-example-tokenizer form-control select2 miniselect"  style="width: 100%" value="<?=$productoseditar->get('pro_currency')?>" >
-                                  <option value="$">CLP</option>
-                                  <option value="us">USD</option>
+                                  <option value="clp">CLP</option>
+                                  <option value="usd">USD</option>
+                                 
 
                           </select>
                       </div>

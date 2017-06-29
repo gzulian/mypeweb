@@ -228,6 +228,7 @@ public function findAllCatvacias(){
     $this->db->select('*');
     $this->db->from('mypeweb_category');
     $this->db->where('cat_parent',null);
+    $this->db->or_where('cat_parent',0);
     $this->db->where('cat_status',1);
     $this->db->order_by("cat_position", "asc");
     $consulta = $this->db->get();

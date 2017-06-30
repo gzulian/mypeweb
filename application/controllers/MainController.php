@@ -39,7 +39,7 @@ class MainController extends CI_Controller {
 		$data['empresa'] = 	$this->empresa->getActive();
 		
 		$this->load->view('web/header', $data);
-		$this->load->view('web/home', $data);
+		$this->load->view('web/contacto', $data);
 		$this->load->view('web/footer', $data);
 
 	}

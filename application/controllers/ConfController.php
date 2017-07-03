@@ -172,7 +172,8 @@ class ConfController extends CI_Controller {
           'banner' => $conf->get('con_banner'),
           'products' => $conf->get('con_products')
           );
-			echo json_encode($configuration);
+		echo json_encode($configuration,JSON_UNESCAPED_SLASHES);
+			
 		
 		 }else{
             return "existen campos vacíos";

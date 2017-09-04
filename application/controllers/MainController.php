@@ -6,18 +6,26 @@ class MainController extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->load->model('Category_model', 'cat');
 		$this->load->model('Config_model', 'conf');
-		$this->load->model('Multimedia_model', 'mul');
-		$this->load->model('Product_model', 'prod');
-		$this->load->model('Redes_model', 'redes');
-		$this->load->model('Team_model', 'team');
 		$this->load->model('Empresa_model', 'empresa');
+		$this->configuration  = $this->conf->findAllActivados();
+		$this->empresa = $this->empresa->getActive();
+		if($this->configuration && $this->empresa){
+			$this->load->model('Category_model', 'cat');
+			$this->load->model('Multimedia_model', 'mul');
+			$this->load->model('Product_model', 'prod');
+			$this->load->model('Redes_model', 'redes');
+			$this->load->model('Team_model', 'team');	
+		}else{
+			$this->load->view('web/default');
+			//exit();
+		}
+		
 	}
 	
 	public function index()
 	{
-		$data['config']         =$this->conf->findAllActivados();
+		$data['config']         =$this->configuration ;
 		$data['categoryParent'] =$this->cat->findAllParentActivados();
 		//Productos para portada
 		$limit                  = $data['config'][0]->get('con_products');
@@ -26,7 +34,7 @@ class MainController extends CI_Controller {
 
 		//print_r($data['multimedia']); exit();
 		$data['redes']=$this->redes->findAll();
-		$data['empresa']        = $this->empresa->getActive();	
+		$data['empresa']        = $this->empresa;	
 		$this->load->view('web/header', $data);
 		$this->load->view('web/home', $data);
 		$this->load->view('web/footer', $data);
@@ -34,9 +42,9 @@ class MainController extends CI_Controller {
 	}
 
 	public function contacto(){
-		$data['config']  =	$this->conf->findAllActivados();
+		$data['config']  =	$this->configuration ;
 		$data['redes']   =	$this->redes->findAll();
-		$data['empresa'] = 	$this->empresa->getActive();
+		$data['empresa'] = 	$this->empresa;
 		
 		$this->load->view('web/header', $data);
 		$this->load->view('web/contacto', $data);
@@ -58,38 +66,38 @@ class MainController extends CI_Controller {
 		}else {
 			$categories = $data['categoryParent'];
 		}
-		$data['config']     =$this->conf->findAllActivados();
+		$data['config']     =$this->configuration ;
 		$data['redes']      =$this->redes->findAll();
 		$data['categories'] = $categories;
-		$data['empresa']    = 	$this->empresa->getActive();
+		$data['empresa']    = 	$this->empresa;
 		$this->load->view('web/header',$data);
 		$this->load->view('web/categoria',$data);
 		$this->load->view('web/footer',$data);
 	}
 	public function productos($id=0){
 		if($id!=0 && is_numeric($id)){
-			$data['config']         =$this->conf->findAllActivados();
+			$data['config']         =$this->configuration ;
 			$data['categoryParent'] =$this->cat->findAllParentActivados();
 			$data['product']        =$this->prod->findById($id);
-			$data['empresa']        = 	$this->empresa->getActive();
+			$data['empresa']        = 	$this->empresa;
 			$data['redes']          =$this->redes->findAll();		
 			$this->load->view('web/header',$data);
 			$this->load->view('web/preview',$data);
 			$this->load->view('web/footer',$data);
 
 		}else{
-			$data['config']         =$this->conf->findAllActivados();
+			$data['config']         =$this->configuration ;
 			$data['categoryParent'] =$this->cat->findAllParentActivados();
 			$data['subCat']         =array();
 			foreach ($data['categoryParent'] as $key) {
 				$data['subCat'][$key->get('cat_id')]=$this->cat->findByParent($key->get('cat_id'));
 			}
-			$data['product']=$this->prod->findAllActivados();
+			$data['product']=$this->prodig;
 			foreach ($data['product'] as $key) {
 				$data['multimedia'][$key->get('pro_id')]=$this->mul->findByProId($key->get('pro_id'));
 			}
 			$data['redes']=$this->redes->findAll();
-			$data['empresa'] = 	$this->empresa->getActive();
+			$data['empresa'] = 	$this->empresa;
 			$this->load->view('web/header', $data);
 			$this->load->view('web/productos', $data);
 			$this->load->view('web/footer', $data);
@@ -100,11 +108,11 @@ class MainController extends CI_Controller {
 
 	}
 	public function Nosotros(){
-		$data['config']			=$this->conf->findAllActivados();		
+		$data['config']			=$this->configuration ;		
 		$data['redes']          =$this->redes->findAll();
 		$data['equipo']         =$this->team->findAll();
 		$data['cant']           =count($data['equipo']);
-		$data['empresa']        = 	$this->empresa->getActive();
+		$data['empresa']        = 	$this->empresa;
 		$data['categoryParent'] =$this->cat->findAllParentActivados();
 		$this->load->view('web/header',$data);
 		$this->load->view('web/desc',$data);
@@ -132,9 +140,9 @@ class MainController extends CI_Controller {
 
 		}
 		$data['results']        =  $results;
-		$data['config']         =	$this->conf->findAllActivados();		
+		$data['config']         =	$this->configuration ;		
 		$data['redes']          =	$this->redes->findAll();
-		$data['empresa']        = 	$this->empresa->getActive();
+		$data['empresa']        = 	$this->empresa;
 		$data['categoryParent'] =	$this->cat->findAllParentActivados();
 
 		$this->load->view('web/header',$data);

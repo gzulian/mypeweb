@@ -310,8 +310,8 @@
                       </label>
                       <div class="col-md-3">
                           <select name="product[pro_currency]" id="currency" required="required"  class="js-example-tokenizer form-control select2 miniselect"  style="width: 100%" value="" >
-                                  <option value="clp">CLP</option>
-                                  <option value="usd">USD</option>
+                                  <option value="$">CLP</option>
+                                  <option value="us">USD</option>
                                  
 
                           </select>

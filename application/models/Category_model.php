@@ -58,14 +58,13 @@ public function createContar($row){
       }
     }
 
-    public function save($catname,$catparent,$catstatus,$catposition){
+    public function save($catname,$catparent,$catstatus){
           $this->load->database();    
           $categorias = array(
           'cat_id' => null,
           'cat_name'=> $catname,
           'cat_parent'=> $catparent,
           'cat_status'=> $catstatus,
-          'cat_position'=> 0
           );
       $this->db->insert('mypeweb_category', $categorias); 
   }

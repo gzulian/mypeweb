@@ -103,17 +103,24 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
         
-           <!-- User Account: style can be found in dropdown.less -->
+            <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+              <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+              <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg" style ="width:25px; height:25px" class="user-image" alt="User Image">
+             <?php } ?> 
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
-
+              <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+                <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg"  class="img-circle" alt="User Image">
+                 <?php } ?> 
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small>Administrador</small>
@@ -121,12 +128,11 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <center>
+                <div class="pull" style="float: center;">
+                  <a href="<?=site_url('LoginController/logoutUser')?>" class="btn btn-danger btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</a>
                 </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
+              </center>
               </li>
             </ul>
           </li>
@@ -143,7 +149,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+        <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+          <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php }else{ ?>
+          <img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php } ?>
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>

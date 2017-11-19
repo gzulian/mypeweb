@@ -31,14 +31,7 @@
   <script src="<?=base_url('resources/themes/explorer/theme.js')?>"></script>
 
  <style type="text/css">
-  body {
-  background: #FFFFFF;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: #4f5252;
-  font-weight: 400;
-}
+ 
   li,ol, li {
   margin: 0;
   padding: 0;
@@ -124,25 +117,30 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
         
-          <!-- User Account: style can be found in dropdown.less -->
+           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+              <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+              <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg" style ="width:25px; height:25px" class="user-image" alt="User Image">
+             <?php } ?> 
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
-
+              <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+                <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg"  class="img-circle" alt="User Image">
+                 <?php } ?> 
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small>Administrador</small>
                 </p>
               </li>
-              
-              
-               <!-- Menu Footer-->
+              <!-- Menu Footer-->
               <li class="user-footer">
                 <center>
                 <div class="pull" style="float: center;">
@@ -152,7 +150,8 @@
               </li>
             </ul>
           </li>
-         
+          <!-- Control Sidebar Toggle Button -->
+      
         </ul>
       </div>
     </nav>
@@ -164,7 +163,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+        <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+          <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php }else{ ?>
+          <img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php } ?>
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>
@@ -172,8 +175,6 @@
          
         </div>
       </div>
-     
-
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">Navegación</li>
@@ -475,8 +476,17 @@
                         <button type="button" id="modal_cancel" class="btn btn-default" data-dismiss="modal" style="margin-right: : 1%">Cancelar</button>
                         <button id="btnAdd" value="1" name="edit" type="submit" class="btn btn-success">Guardar</button></div> 
                     </div>
+                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
                 </div>
+
                 </form>
+
+                  <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+     
+    </div>
+    <strong>Copyright Clínica MYPE Renca</a>.</strong> Derechos reservados
+  </footer>
             </div>
 
   <!-- /.content-wrapper -->
@@ -484,78 +494,7 @@
 <?php else: ?>
            <div class="alert alert-danger fade in"><strong> Producto no encontrado</strong> </div>
     <?php endif ?>  
-     <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-     
-    </div>
-    <strong>Copyright Clínica MYPE Renca</a>.</strong> Derechos reservados
-  </footer>
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800)555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0)">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-
-      </div>
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 

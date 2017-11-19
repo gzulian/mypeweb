@@ -58,17 +58,24 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
         
-           <!-- User Account: style can be found in dropdown.less -->
+          <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+              <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+              <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg" style ="width:25px; height:25px" class="user-image" alt="User Image">
+             <?php } ?> 
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
-
+              <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+                <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg"  class="img-circle" alt="User Image">
+                 <?php } ?> 
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small>Administrador</small>
@@ -76,7 +83,7 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                 <center>
+                <center>
                 <div class="pull" style="float: center;">
                   <a href="<?=site_url('LoginController/logoutUser')?>" class="btn btn-danger btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i> Salir</a>
                 </div>
@@ -97,7 +104,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+        <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+          <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php }else{ ?>
+          <img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php } ?>
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>
@@ -297,8 +308,25 @@
           <!-- /.box -->
         </div>
         <!-- /.col -->
+
+
+   <!--== FOOTER ==-->
+
+          <footer class="main-footer">
+    <div class="pull-right hidden-xs">
+      <b>Version</b> 2.3.8
+    </div>
+    <strong>Copyright Clínica MYPE inacap</a>.</strong> derechos reservados
+  </footer>
+<!--== FIN FOOTER ==-->
+
+
+
+
+
       </div>
       <!-- /.row -->
+
     </section>
     <!-- /.content -->
 
@@ -403,11 +431,13 @@
                         <button id="btnAdd" type="submit" class="btn btn-success">Guardar</button>
                     </div>
                 </div>
+                <!-- /modal footer -->
                 </form>
-            </div>
         </div>
     </div>
     </div>
+
+
     <!--==== Fin Modal editar red social ====-->
 
      <!--====Modal Eliminar red social =====-->
@@ -435,21 +465,10 @@
         </div>
     </div>
 <!--======== Fin Modal Eliminar red social ========= -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.8
-    </div>
-    <strong>Copyright Clínica MYPE inacap</a>.</strong> derechos reservados
-  </footer>
-
-  <!-- Control Sidebar -->
  
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+ 
+   </div>
+  <!-- /.content-wrapper -->
 </div>
 <!-- ./wrapper -->
 

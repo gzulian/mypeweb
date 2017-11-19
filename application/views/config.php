@@ -96,14 +96,21 @@
            <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+              <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+              <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg" style ="width:25px; height:25px" class="user-image" alt="User Image">
+             <?php } ?> 
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
-
+              <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+                <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg"  class="img-circle" alt="User Image">
+                 <?php } ?> 
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small>Administrador</small>
@@ -132,7 +139,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+        <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+          <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php }else{ ?>
+          <img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php } ?>
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>
@@ -595,6 +606,7 @@
                     </div>
 
             </div>
+            <!--== Fin modal-body ==-->
             <div class="modal-footer">
             <div class="col-lg-2">
                     <input type="hidden" id="editid" name="editid"   class="form-control col-md-7 col-xs-12">
@@ -618,21 +630,20 @@
 
     <!-- /modal editar -->
 
-  </div>
-  <!-- /.content-wrapper -->
+  <!--== FOOTER ==-->
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.8
     </div>
     <strong>Copyright Clínica MYPE inacap</a>.</strong> derechos reservados
   </footer>
+    <!--== FIN FOOTER ==-->
 
-  <!-- Control Sidebar -->
- 
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+
+
+  </div>
+  <!-- /.content-wrapper -->
+
 </div>
 <!-- ./wrapper -->
 

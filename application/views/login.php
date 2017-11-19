@@ -56,11 +56,11 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <?php foreach ($log as $logo): ?>
       <?php if($logo->get('con_logo') != NULL || !empty($logo->get('con_logo')) ){?>
-        <a href="<?=site_url('#')?>" class="logo">
+        <a href="#" class="logo">
       <span class="logo-lg"><img src="<?=base_url('')?>resources/images/logo/<?=$logo->get('con_logo')?>" style="width: 140px; height: 50px;"></span>
     </a>
     <?php }else{?>
-     <a href="<?=site_url('#')?>" class="logo">
+     <a href="#" class="logo">
       <span class="logo-lg">Sin Logo</span>
     </a>
     <?php } ?>

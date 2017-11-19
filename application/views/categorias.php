@@ -22,14 +22,6 @@
   <link rel="stylesheet" href="<?=base_url('resources/select2-4.0.3/dist/css/select2.min.css')?>">
   
  <style type="text/css">
-  body {
-  background: #FFFFFF;
-  margin: 0px;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
-  color: #4f5252;
-  font-weight: 400;
-}
   li,ol, li {
   margin: 0;
   padding: 0;
@@ -81,7 +73,7 @@
   <header class="main-header">
         <!-- mini logo for sidebar mini 50x50 pixels -->
       <?php foreach ($log as $logo): ?>
-      <?php if($logo->get('con_logo') != NULL || !empty($logo->get('con_logo')) ){?>
+      <?php if($logo->get('con_logo') != NULL || !empty($logo->get('con_logo')) || $logo->get('con_logo') != '' ){?>
         <a href="<?=site_url('LoginController/volverIndex')?>" class="logo">
       <span class="logo-mini"><img src="<?=base_url('')?>resources/images/logo/<?=$logo->get('con_logo')?>" style="width: 100%; height: 100%;"></span>
       <!-- logo for regular state and mobile devices -->
@@ -108,17 +100,24 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
         
-           <!-- User Account: style can be found in dropdown.less -->
+            <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+            <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+              <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style ="width:25px; height:25px" class="user-image" alt="User Image">
+              <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg" style ="width:25px; height:25px" class="user-image" alt="User Image">
+             <?php } ?> 
               <span class="hidden-xs"><?php echo $this->session->userdata('username');?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
-
+              <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+                <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>"  class="img-circle" alt="User Image">
+                <?php }else{ ?>
+                <img src="<?=base_url('')?>resources/images/mype.jpg"  class="img-circle" alt="User Image">
+                 <?php } ?> 
                 <p>
                   <?php echo $this->session->userdata('username');?>
                   <small>Administrador</small>
@@ -147,7 +146,11 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?=base_url('')?>resources/images/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+        <?php if($this->session->userdata('imagen') != NULL || !empty($this->session->userdata('imagen'))){?>
+          <img src="<?=base_url('')?>resources/images/admin/<?=$this->session->userdata('imagen')?>" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php }else{ ?>
+          <img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height: 40px" class="img-circle" alt="User Image">
+          <?php } ?>
         </div>
         <div class="pull-left info">
           <p><?php echo $this->session->userdata('username');?></p>
@@ -340,6 +343,7 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
+      </section>
     <!-- /.content -->
     
   <div id="modalist" class="modal fade" role="dialog" aria-hidden="true">
@@ -435,23 +439,23 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" >Nueva Categoria</h4>
+                    <h4 class="modal-title" >Nueva Categoría</h4>
                 </div>
                 <div class="modal-body text-center">
                     <form class="form-horizontal form-label-left" action="<?=site_url('CategoriasController/agregarCategorias')?>" method="POST">
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="first-name">Nombre Categoria<span class="required">*</span>
+                            <label class="control-label col-md-3" for="first-name">Nombre Categoría<span class="required">*</span>
                             </label>
                              <div class="col-md-7">
                             <input type="text" id="nomcat" name="nomcat"  required="required" class="form-control col-md-7 col-xs-12"></div>
                             
                         </div>
                         <div class="form-group">
-                          <label class="control-label col-md-3" for="first-name">Categoria padre<span class="required">*</span>
+                          <label class="control-label col-md-3" for="first-name">Categoría padre<span class="required">*</span>
                             </label>
                             <div class="col-md-7">
                             <select id="parcat" name="parcat" class="js-example-tokenizer form-control select2 miniselect"  style="width: 100%">
-                               <option value="NULL">Elegir Categoria Padre</option>
+                               <option value="NULL">Elegir Categoría Padre</option>
                                 <?php foreach ($catParents as $par) {?>
                                 <option value="<?=$par->get('cat_id')?>"><?=$par->get('cat_name')?></option>
                                 <?php } ?>
@@ -496,28 +500,29 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" >Editar Categoria</h4>
+                    <h4 class="modal-title" >Editar Categoría</h4>
                 </div>
                 <div class="modal-body text-center">
                     <form class="form-horizontal form-label-left" action="<?=site_url('CategoriasController/editarCategorias')?>" method="POST">
                         <div class="form-group">
-                            <label class="control-label col-md-3" for="first-name">Nombre Categoria<span class="required">*</span>
+                            <label class="control-label col-md-3" for="first-name">Nombre Categoría<span class="required">*</span>
                             </label>
                              <div class="col-md-7">
                             <input type="text" id="editnomcat" name="editnomcat"  required="required" class="form-control col-md-7 col-xs-12"></div>
                             
                         </div>
                         <div class="form-group">
-                             <label class="control-label col-md-3" for="first-name">Categoria padre<span class="required">*</span>
+                             <label class="control-label col-md-3" for="first-name">Categoría padre<span class="required">*</span>
                             </label>
                             <div class="col-md-7">
                             <select id="editparcat" name="editparcat" class="js-example-tokenizer form-control select2 miniselect"  style="width: 100%">
-                               <option value="null">Elegir Categoria Padre</option>
+                               <option value="null">Elegir Categoría Padre</option>
                                 <?php foreach ($catParents as $par) {?>
                                 <option value="<?=$par->get('cat_id')?>"><?=$par->get('cat_name')?></option>
                                 <?php } ?>
                             </select>
                         </div>
+                        <br>
                         <br>
                          <div class="form-group">
                             <label class="control-label col-md-3" for="first-name">Estado<span class="required">*</span>
@@ -560,10 +565,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" >Eliminar Categoria</h4>
+                    <h4 class="modal-title" >Eliminar Categoría</h4>
                 </div>
                 <div class="modal-body text-center">
-                    <h4>¿Seguro/a que desea eliminar la categoria?</h4><h3 id="modal_name"></h3>
+                    <h4>¿Seguro/a que desea eliminar la categoría?</h4><h3 id="modal_name"></h3>
                     <div class="modal-footer">
                         <div class="col-md-4">
                             <button id="btnDel" type="button" class="btn btn-danger">Eliminar</button>
@@ -578,208 +583,15 @@
     </div>
 <!--======== Fin Modal Eliminar categoria ========= -->
 
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
+  
+<footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.3.8
     </div>
-    
+   <strong>Copyright Clínica MYPE inacap</a>.</strong> derechos reservados
   </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0'">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <i class="menu-icon fa fa-user bg-yellow"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Frodo Updated His Profile</h4>
-
-                <p>New phone +1(800'555-1234</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <i class="menu-icon fa fa-envelope-o bg-light-blue"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Nora Joined Mailing List</h4>
-
-                <p>nora@example.com</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <i class="menu-icon fa fa-file-code-o bg-green"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Cron Job 254 Executed</h4>
-
-                <p>Execution time 5 seconds</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:void(0'">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="label label-danger pull-right">70%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <h4 class="control-sidebar-subheading">
-                Update Resume
-                <span class="label label-success pull-right">95%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-success" style="width: 95%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <h4 class="control-sidebar-subheading">
-                Laravel Integration
-                <span class="label label-warning pull-right">50%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:void(0'">
-              <h4 class="control-sidebar-subheading">
-                Back End Framework
-                <span class="label label-primary pull-right">68%</span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-primary" style="width: 68%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Allow mail redirect
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Other sets of options are available
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Expose author name in posts
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Allow the user to show his name in blog posts
-            </p>
-          </div>
-          <!-- /.form-group -->
-
-          <h3 class="control-sidebar-heading">Chat Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Show me as online
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Turn off notifications
-              <input type="checkbox" class="pull-right">
-            </label>
-          </div>
-          <!-- /.form-group -->
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Delete chat history
-              <a href="javascript:void(0'" class="text-red pull-right"><i class="fa fa-trash-o"></i></a>
-            </label>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-       immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
+</div>
+  <!-- /.content-wrapper -->
 </div>
 <!-- ./wrapper -->
 
@@ -814,10 +626,10 @@
       "autoWidth": false
     });
 
-     $("#nomcat").select2({
+     $("#parcat").select2({
      theme: "classic"
 });
-$("#editnomcat").select2();
+$("#editparcat").select2();
   });
 
  // <==== Fin DataTable Options ===>

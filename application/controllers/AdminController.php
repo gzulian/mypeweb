@@ -41,8 +41,8 @@ class AdminController extends CI_Controller {
 				$punto = ".";
 				$img =  $_POST['userName'];
 				$imagen = $img.$punto.$extension;
-				$ruta = "./resources/images/{$imagen}";
-				move_uploaded_file($tmp_name, "./resources/images/{$imagen}");
+				$ruta = "./resources/images/admin/{$imagen}";
+				move_uploaded_file($tmp_name, "./resources/images/admin/{$imagen}");
 
 				$datos = $this->admin->save($userName,$encriptado,$names,$imagen);
 				$this->session->set_flashdata('notice', 'El usuario con nombre = '.$names.' ha sido creado correctamente!');
@@ -87,12 +87,12 @@ class AdminController extends CI_Controller {
 					$punto = ".";
 					$img =  $_POST['editUserName'];
 					$imagen = $img.$punto.$extension;
-					$ruta = "./resources/images/{$imagen}";
+					$ruta = "./resources/images/admin/{$imagen}";
 					
-					unlink("./resources/images/{$imagen}"); 
+					unlink("./resources/images/admin/{$imagen}"); 
 					clearstatcache(); 
 
-					move_uploaded_file($tmp_name, "./resources/images/{$imagen}");
+					move_uploaded_file($tmp_name, "./resources/images/admin/{$imagen}");
 
 					$encriptado = sha1($clave);
 

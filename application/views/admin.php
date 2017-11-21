@@ -322,7 +322,11 @@
                   
                     <td><?=$tm->get('adm_name')?></td>
                     <td><?=$tm->get('adm_user')?></td>
-                    <td align="center"><a href="#<?=$tm->get('adm_user')?>"><img src="<?=base_url('')?>resources/images/admin/<?=$tm->get('adm_photo')?>" style="width:40px; height:40px;  border-radius: 50%;"></a></td>
+                    <?php if($tm->get('adm_photo') == NULL || empty($tm->get('adm_photo')) || $tm->get('adm_photo') == ''){?>
+                    <td align="center"><a href="#"><img src="<?=base_url('')?>resources/images/mype.jpg" style="width:40px; height:40px;  border-radius: 50%;"></a></td>
+                    <?php }else{?>
+                       <td align="center"><a href="#<?=$tm->get('adm_user')?>"><img src="<?=base_url('')?>resources/images/admin/<?=$tm->get('adm_photo')?>" style="width:40px; height:40px;  border-radius: 50%;"></a></td>
+                    <?php } ?>
                     <td style="width: 5px;"> <a type='button' fakeid="<?=$tm->get('adm_id')?>" class='btn btn-default editUsr pull-right'><i class="fa fa-pencil"></i></a></td>
                     <td style="width: 4px;"><a type='button' fakeid="<?=$tm->get('adm_id')?>" class='btn btn-danger deleteUsr pull-right deleteUsr' data-toggle='modal' data-target='#delete_modal'> <i class="fa fa-user-times" ></i></a></td>
                     </tr>
